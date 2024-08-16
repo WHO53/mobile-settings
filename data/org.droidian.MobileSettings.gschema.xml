@@ -12,6 +12,11 @@
       <summary>Wake up screen by double taping panel</summary>
       <description></description>
     </key>
+    <key name="touchpanel-double-tap-node-path" type="s">
+      <default>'NULL'</default>
+      <summary>DT2W node path</summary>
+      <description></description>
+    </key>
 
   </schema>
 </schemalist>

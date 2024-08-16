@@ -9,6 +9,7 @@
 
 #include "gestures.h"
 #include "gestures-focaltech.h"
+#include "gestures-generic.h"
 #include "gestures-xiaomi.h"
 #include "gestures-sec.h"
 
@@ -38,6 +39,12 @@ set_setting (Bus         *self,
         if (self->priv->gestures) {
             g_dbus_gvariant_to_gvalue (variant, &val);
             g_object_set_property (G_OBJECT (self->priv->gestures), "double-tap-to-wake-enabled", &val);
+        }
+    }
+    if (g_strcmp0 (setting, "touchpanel-double-tap-node-path") == 0) {
+        if (self->priv->gestures) {
+            g_dbus_gvariant_to_gvalue (variant, &val);
+            g_object_set_property (G_OBJECT (self->priv->gestures), "touchpanel-dt2w-node", &val);
         }
     }
 }
@@ -197,7 +204,9 @@ bus_init (Bus *self)
         self
     );
 
-    if (gestures_focaltech_supported ())
+    if (gestures_generic_supported ())
+        self->priv->gestures = (Gestures *) gestures_generic_new ();
+    else if (gestures_focaltech_supported ())
         self->priv->gestures = (Gestures *) gestures_focaltech_new ();
     else if (gestures_xiaomi_supported ())
         self->priv->gestures = (Gestures *) gestures_xiaomi_new ();

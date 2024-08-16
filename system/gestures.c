@@ -23,4 +23,10 @@ gestures_default_init (GesturesInterface *iface)
                                                                "Whether double tap to wake is enabled",
                                                                FALSE,
                                                                G_PARAM_READABLE | G_PARAM_WRITABLE));
+    g_object_interface_install_property (iface,
+                                         g_param_spec_string ("touchpanel-dt2w-node",
+                                                              "touchpanel-dt2w-node",
+                                                              "Node Path",
+                                                              NULL,
+                                                              G_PARAM_READABLE | G_PARAM_WRITABLE));
 }

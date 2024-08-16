@@ -40,7 +40,7 @@ static char* find_fts_gesture_mode_node(void) {
         syspath = udev_list_entry_get_name(dev_list_entry);
         dev = udev_device_new_from_syspath(udev, syspath);
 
-        sysattr = udev_device_get_sysattr_value(dev, "fts_gesture_mode");
+        sysattr = udev_device_get_sysattr_value(dev, "fts_gesture_mde");
         if (sysattr) {
             if (realpath(syspath, resolved_path) != NULL) {
                 size_t full_path_len = strlen(resolved_path) + strlen("/fts_gesture_mode") + 1;
