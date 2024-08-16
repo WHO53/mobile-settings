@@ -8,6 +8,7 @@
 #include "../common/utils.h"
 
 #include "gestures.h"
+#include "gestures-focaltech.h"
 #include "gestures-xiaomi.h"
 #include "gestures-sec.h"
 
@@ -196,7 +197,9 @@ bus_init (Bus *self)
         self
     );
 
-    if (gestures_xiaomi_supported ())
+    if (gestures_focaltech_supported ())
+        self->priv->gestures = (Gestures *) gestures_focaltech_new ();
+    else if (gestures_xiaomi_supported ())
         self->priv->gestures = (Gestures *) gestures_xiaomi_new ();
     else if (gestures_sec_supported ())
         self->priv->gestures = (Gestures *) gestures_sec_new ();
